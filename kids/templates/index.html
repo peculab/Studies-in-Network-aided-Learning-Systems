@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>最近 20 筆</h2>
+{% for r in rows %}
+  <div class="card">
+    <div><b>{{ r["created_at"] }}</b></div>
+    <div>活動：{{ "聽見" if r["activity_mode"]=="heard" else "參與" }} / {{ r["activity_name"] }}（{{ r["context"] }}）</div>
+    <div>反應：{{ r["response_type"] }} ｜ 強度：{{ r["intensity"] }} ｜ 情緒：{{ r["emotion"] }}</div>
+    {% if r["duration_sec"] %}<div>持續：{{ r["duration_sec"] }} 秒</div>{% endif %}
+    {% if r["notes"] %}<div>備註：{{ r["notes"] }}</div>{% endif %}
+  </div>
+{% else %}
+  <p>目前還沒有紀錄，先去 <a href="/add">新增一筆</a> 吧。</p>
+{% endfor %}
+{% endblock %}

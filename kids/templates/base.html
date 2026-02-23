@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>幼兒發展紀錄</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: system-ui, -apple-system, "Noto Sans TC", sans-serif; margin: 16px; }
+    nav a { margin-right: 12px; }
+    .card { border: 1px solid #ddd; border-radius: 12px; padding: 12px; margin: 10px 0; }
+    label { display:block; margin-top:10px; }
+    input, select, textarea { width:100%; padding:10px; border-radius:10px; border:1px solid #ccc; }
+    button { padding:10px 14px; border-radius:10px; border:0; cursor:pointer; }
+    .row { display:grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    @media (max-width: 700px){ .row{ grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/">最近紀錄</a>
+    <a href="/add">新增紀錄</a>
+    <a href="/dashboard">儀表板</a>
+  </nav>
+  <hr/>
+  {% block content %}{% endblock %}
+</body>
+</html>

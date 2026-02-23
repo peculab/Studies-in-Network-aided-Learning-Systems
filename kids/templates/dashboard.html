@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>儀表板（近況分析）</h2>
+
+<div class="card">
+  <h3>近 30 天每日紀錄數</h3>
+  <canvas id="dailyChart"></canvas>
+</div>
+
+<div class="row">
+  <div class="card">
+    <h3>反應類別分佈</h3>
+    <canvas id="respChart"></canvas>
+  </div>
+  <div class="card">
+    <h3>情緒比例</h3>
+    <canvas id="emoChart"></canvas>
+  </div>
+</div>
+
+<div class="card">
+  <h3>常見觸發活動 Top 10</h3>
+  <ol>
+    {% for a in act %}
+      <li>{{ a["activity_name"] }}（{{ a["cnt"] }}）</li>
+    {% endfor %}
+  </ol>
+</div>
+
+<script>
+  var dailyLabels = JSON.parse('{{ daily|map(attribute="day")|list|tojson }}');
+  var dailyData   = JSON.parse('{{ daily|map(attribute="cnt")|list|tojson }}');
+
+  new Chart(document.getElementById("dailyChart"), {
+    type: "line",
+    data: { labels: dailyLabels, datasets: [{ label: "筆數", data: dailyData }] }
+  });
+
+  var respLabels = JSON.parse('{{ resp|map(attribute="response_type")|list|tojson }}');
+  var respData   = JSON.parse('{{ resp|map(attribute="cnt")|list|tojson }}');
+  new Chart(document.getElementById("respChart"), {
+    type: "bar",
+    data: { labels: respLabels, datasets: [{ label: "次數", data: respData }] }
+  });
+
+  var emoLabels = JSON.parse('{{ emo|map(attribute="emotion")|list|tojson }}');
+  var emoData   = JSON.parse('{{ emo|map(attribute="cnt")|list|tojson }}');
+  new Chart(document.getElementById("emoChart"), {
+    type: "doughnut",
+    data: { labels: emoLabels, datasets: [{ label: "次數", data: emoData }] }
+  });
+</script>
+{% endblock %}

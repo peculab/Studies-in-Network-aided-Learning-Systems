@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>新增紀錄</h2>
+<form method="post" class="card">
+  <div class="row">
+    <div>
+      <label>活動類型</label>
+      <select name="activity_mode" required>
+        <option value="heard">聽見</option>
+        <option value="joined">參與</option>
+      </select>
+    </div>
+    <div>
+      <label>情境</label>
+      <select name="context" required>
+        <option value="home">家裡</option>
+        <option value="school">學校</option>
+        <option value="outdoor">戶外</option>
+        <option value="other">其他</option>
+      </select>
+    </div>
+  </div>
+
+  <label>活動名稱（例：音樂、叫名字、積木、講故事）</label>
+  <input name="activity_name" required>
+
+  <label>反應類別</label>
+  <select name="response_type" required>
+    <option>注意/轉頭</option>
+    <option>模仿/跟唱</option>
+    <option>口語回應</option>
+    <option>退縮/抗拒</option>
+    <option>情緒爆發</option>
+    <option>身體動作</option>
+    <option>其他</option>
+  </select>
+
+  <div class="row">
+    <div>
+      <label>反應強度（1-5）</label>
+      <select name="intensity" required>
+        <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+      </select>
+    </div>
+    <div>
+      <label>情緒</label>
+      <select name="emotion" required>
+        <option value="positive">正向</option>
+        <option value="neutral">中性</option>
+        <option value="negative">負向</option>
+      </select>
+    </div>
+  </div>
+
+  <label>持續時間（秒，可不填）</label>
+  <input name="duration_sec" type="number" min="0" placeholder="例如 30">
+
+  <label>備註（可不填）</label>
+  <textarea name="notes" rows="3" placeholder="例如：先皺眉，後來跟著唱"></textarea>
+
+  <div style="margin-top:12px;">
+    <button type="submit">儲存</button>
+  </div>
+</form>
+{% endblock %}
